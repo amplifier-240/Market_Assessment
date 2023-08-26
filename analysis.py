@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -32,12 +33,16 @@ monthly_sales = df.set_index('Order_Date')['Revenue'].resample('M').sum()
 sns.lineplot(data=monthly_sales, marker='o', ax=ax1)
 ax1.set_xlabel("Date")
 ax1.set_ylabel("Revenue ($)")
+
+# Rotate and align x-axis date labels
+plt.xticks(rotation=45, ha='right')
+
 st.pyplot(fig1)
 
 # Bar Plot: Sales by Category
 st.subheader("Sales by Category")
 fig2, ax2 = plt.subplots()
-sns.barplot(data=df, x='Category', y='Revenue', ci=None, ax=ax2)
+sns.barplot(data=df, x='Category', y='Revenue', errorbar=None, ax=ax2)
 ax2.set_xlabel("Category")
 ax2.set_ylabel("Revenue ($)")
 st.pyplot(fig2)
